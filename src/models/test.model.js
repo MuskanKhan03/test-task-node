@@ -1,13 +1,15 @@
 const { Schema, model } = require('mongoose');
 
-const testSchema = new Schema({
-  name: {
+const weatherProviderSchema = new Schema({
+  providerName: {
     type: String,
     required: true,
+    unique: true,
   },
-  title: {
-    type: String,
-    required: true,
+  isPinned: {
+    type: Boolean,
+    default: false,
   },
 });
-module.exports = model('test', testSchema);
+
+module.exports = model('WeatherProvider', weatherProviderSchema);

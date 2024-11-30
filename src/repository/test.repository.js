@@ -1,8 +1,22 @@
-const TestModel = require('../models/test.model');
+const WeatherProviderModel = require('../models/test.model');
 
-const creatTestDoc = (payload) => {
-  return TestModel.create(payload);
+const createProvider = (payload) => {
+  return WeatherProviderModel.create(payload);
 };
+
+const updateProvider = (providerName, updateData) => {
+  return WeatherProviderModel.findOneAndUpdate({ providerName }, updateData, {
+    new: true,
+    upsert: true,
+  });
+};
+
+const getPinnedProviders = () => {
+  return WeatherProviderModel.find({ isPinned: true }).sort({ providerName: 1 });
+};
+
 module.exports = {
-  creatTestDoc,
+  createProvider,
+  updateProvider,
+  getPinnedProviders,
 };

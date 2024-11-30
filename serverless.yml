@@ -23,6 +23,7 @@ provider:
   runtime: nodejs20.x
   lambdaHashingVersion: 20201221
   versionFunctions: false
+  stage: dev
   environment:
     MONGO_DB_URL: ${self:custom.MONGO_DB_URL}
 
@@ -32,8 +33,20 @@ plugins:
   - serverless-plugin-split-stacks
 
 functions:
-
-
+  getWeather:
+    handler: src/functions/test.handler
+    events:
+      - http:
+          path: "/api/weather"
+          method: get
+          cors: true
+  togglePin:
+    handler: src/functions/test.handler
+    events:
+      - http:
+          path: "/api/weather/togglePin"
+          method: post
+          cors: true
 
   testApi:
     timeout: 30 # With cold starts this endpoint can be slow
@@ -47,4 +60,3 @@ functions:
           cors:
             origin: '*'
             allowCredentials: false
-
