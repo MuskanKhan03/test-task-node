@@ -10,7 +10,6 @@ const WeatherAPI = async (event) => {
       const weatherData = await fetchWeatherData();
       const pinnedProviders = await getPinnedProviders();
 
-      // Combine pinned providers at the top
       const combinedResults = [
         ...pinnedProviders.map((provider) => ({
           providerName: provider.providerName,
